@@ -143,6 +143,60 @@ ELGamal/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ELGamal.dir/build.make CMakeFiles/ELGamal.dir/build
 .PHONY : ELGamal/fast
 
+ELGamal.o: ELGamal.cpp.o
+
+.PHONY : ELGamal.o
+
+# target to build an object file
+ELGamal.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ELGamal.dir/build.make CMakeFiles/ELGamal.dir/ELGamal.cpp.o
+.PHONY : ELGamal.cpp.o
+
+ELGamal.i: ELGamal.cpp.i
+
+.PHONY : ELGamal.i
+
+# target to preprocess a source file
+ELGamal.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ELGamal.dir/build.make CMakeFiles/ELGamal.dir/ELGamal.cpp.i
+.PHONY : ELGamal.cpp.i
+
+ELGamal.s: ELGamal.cpp.s
+
+.PHONY : ELGamal.s
+
+# target to generate assembly for a file
+ELGamal.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ELGamal.dir/build.make CMakeFiles/ELGamal.dir/ELGamal.cpp.s
+.PHONY : ELGamal.cpp.s
+
+MapReduce.o: MapReduce.cpp.o
+
+.PHONY : MapReduce.o
+
+# target to build an object file
+MapReduce.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ELGamal.dir/build.make CMakeFiles/ELGamal.dir/MapReduce.cpp.o
+.PHONY : MapReduce.cpp.o
+
+MapReduce.i: MapReduce.cpp.i
+
+.PHONY : MapReduce.i
+
+# target to preprocess a source file
+MapReduce.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ELGamal.dir/build.make CMakeFiles/ELGamal.dir/MapReduce.cpp.i
+.PHONY : MapReduce.cpp.i
+
+MapReduce.s: MapReduce.cpp.s
+
+.PHONY : MapReduce.s
+
+# target to generate assembly for a file
+MapReduce.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ELGamal.dir/build.make CMakeFiles/ELGamal.dir/MapReduce.cpp.s
+.PHONY : MapReduce.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -179,6 +233,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... ELGamal"
+	@echo "... ELGamal.o"
+	@echo "... ELGamal.i"
+	@echo "... ELGamal.s"
+	@echo "... MapReduce.o"
+	@echo "... MapReduce.i"
+	@echo "... MapReduce.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/ELGamal.dir/ELGamal.cpp.o"
+  "CMakeFiles/ELGamal.dir/MapReduce.cpp.o"
   "CMakeFiles/ELGamal.dir/main.cpp.o"
   "ELGamal"
   "ELGamal.pdb"

@@ -94,12 +94,12 @@ clean: CMakeFiles/ELGamal.dir/clean
 CMakeFiles/ELGamal.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ELGamal.dir/build.make CMakeFiles/ELGamal.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ELGamal.dir/build.make CMakeFiles/ELGamal.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/leaves/CLionProjects/ELGamal/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target ELGamal"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/leaves/CLionProjects/ELGamal/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4 "Built target ELGamal"
 .PHONY : CMakeFiles/ELGamal.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ELGamal.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/leaves/CLionProjects/ELGamal/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/leaves/CLionProjects/ELGamal/cmake-build-debug/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/ELGamal.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/leaves/CLionProjects/ELGamal/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/ELGamal.dir/rule

@@ -80,6 +80,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/leaves/CLionProjects/ELGamal/ELGamal.cpp">
+			<Option target="ELGamal"/>
+		</Unit>
+		<Unit filename="/Users/leaves/CLionProjects/ELGamal/ELGamal.h">
+			<Option target="ELGamal"/>
+		</Unit>
+		<Unit filename="/Users/leaves/CLionProjects/ELGamal/MapReduce.cpp">
+			<Option target="ELGamal"/>
+		</Unit>
+		<Unit filename="/Users/leaves/CLionProjects/ELGamal/MapReduce.h">
+			<Option target="ELGamal"/>
+		</Unit>
 		<Unit filename="/Users/leaves/CLionProjects/ELGamal/main.cpp">
 			<Option target="ELGamal"/>
 		</Unit>

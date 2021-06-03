@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/leaves/CLionProjects/ELGamal/main.cpp
+/Users/leaves/CLionProjects/ELGamal/ELGamal.h
 iostream
 -
 vector
@@ -17,4 +17,24 @@ algorithm
 -
 random
 -
+
+/Users/leaves/CLionProjects/ELGamal/MapReduce.h
+thread
+/Users/leaves/CLionProjects/ELGamal/thread
+vector
+/Users/leaves/CLionProjects/ELGamal/vector
+cstdint
+-
+string
+-
+iostream
+/Users/leaves/CLionProjects/ELGamal/iostream
+fstream
+/Users/leaves/CLionProjects/ELGamal/fstream
+
+/Users/leaves/CLionProjects/ELGamal/main.cpp
+MapReduce.h
+/Users/leaves/CLionProjects/ELGamal/MapReduce.h
+ELGamal.h
+/Users/leaves/CLionProjects/ELGamal/ELGamal.h
 
