@@ -9,12 +9,11 @@ void Encrypt(uint32_t M, uint32_t idx, crptxt* cryps, uint32_t* ds){
     uint64_t d;
     uint64_t y;
 
-    std::srand(std::time(nullptr));
+    std::srand(M + idx);
 
     do{
         alpha = std::rand() % prime;
     }while(!is_origin(alpha,prime));
-    std::srand(std::time(nullptr));
     do{
         d = std::rand() % prime;
     }while(d == 1);
@@ -71,8 +70,10 @@ int main(int argc, char* argv[]){
     fstream result("Tmp/result.txt",ios::out | ios::trunc);
     fstream crp("Tmp/crptxts.txt",ios::out | ios::trunc);
     fstream dd("Tmp/ds.txt",ios::out | ios::trunc);
+    fstream crp0("Tmp/crptxts0.txt",ios::out | ios::trunc);
     for(uint32_t i = 0; i < chars->size(); i++){
         threads->at(i).join();
+        crp0 << chars->at(i) << endl;
         crp << crptxts[i].c1 << ',' << crptxts[i].c2 << endl;
         dd << ds[i] << endl;
         uint32_t M = decrypt(crptxts[i],ds[i],prime);
