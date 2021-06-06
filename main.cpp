@@ -1,89 +1,91 @@
-#include "MapReduce.h"
+#include <map>
 #include "ELGamal.h"
+#include "thread"
 
-uint32_t prime_;
+const uint32_t prime = 10037;
 
+void Encrypt(uint32_t M, uint32_t idx, crptxt* cryps, uint32_t* ds){
+    uint64_t alpha;
+    uint64_t d;
+    uint64_t y;
 
-int mapFunc(string start, string middle, string key){
-    uint32_t prime = prime_;
-    string value = get_value(start.c_str(),key.c_str());
-    fstream file(value, ios::in | ios::out);
-    char buffer[1000];
-    uint64_t M;
-    if(!file.eof()){
-        file.getline(buffer,1000*sizeof(char));
-        M = atoi(buffer);
+    std::srand(std::time(nullptr));
 
-        uint64_t alpha;
-        uint64_t d;
-        uint64_t y;
+    do{
+        alpha = std::rand() % prime;
+    }while(!is_origin(alpha,prime));
+    std::srand(std::time(nullptr));
+    do{
+        d = std::rand() % prime;
+    }while(d == 1);
+    y = modulo(alpha, d, prime);
 
-        for(uint64_t i = 2; i < prime; i++){
-            if(is_origin(i,prime)){
-                alpha = i;
-                break;
-            }
-        }
-
-        std::srand(std::time(nullptr));
-        do{
-            d = std::rand() % prime;
-        }while(d == 1);
-        y = modulo(alpha, d, prime);
-
-        auto* C = encrypt(M,prime,alpha,y);
-        uint64_t M_ = decrypt(C, d, prime);
-        assert(M_ == M);
-//        cout << "明文: " << M << endl;
-//        cout << "密文: " << C->at(0) << " " << C->at(1) << endl;
-//        cout << "公钥: " << y << endl;
-//        cout << "私钥: " << d << endl;
-//        cout << "解密后明文: " << M_ << "\n" << endl;
-
-        string output_name(middle + "_" + key);
-        fstream output(output_name, ios::in | ios::out | ios::trunc);
-        output << "明文: " << M << endl;
-        output << "密文: " << C->at(0) << " " << C->at(1) << endl;
-        output << "公钥: " << y << endl;
-        output << "私钥: " << d << endl;
-        output << "解密后明文: " << M_ << "\n" << endl;
-        output.close();
-
-        return 0;
-    }
-    file.close();
-    return 0;
+    vector<uint64_t>* C = encrypt(M,prime,alpha,y);
+    cryps[idx].c1 = C->at(0);
+    cryps[idx].c2 = C->at(1);
+    ds[idx] = d;
+    delete C;
 }
 
-int reduceFunc(string middle, string end, string count){
-    uint32_t count_ = atoi(count.c_str());
+int main(int argc, char* argv[]){
     char buffer[1000];
-
-    string output_name(end);
-    fstream output(output_name, ios::in | ios::out | ios::trunc);
-
-    for(uint32_t key = 0; key < count_; key++){
-        string value = string(middle + "_" + to_string(key));
-        fstream file(value, ios::in | ios::out);
-        while(!file.eof()){
-            file.getline(buffer, 1000*sizeof(char));
-            output << buffer << endl;
-        }
-        file.close();
+    fstream alphabet("Data/alphabet.txt", ios::in);
+//    uint32_t* alpha = new uint32_t[26];
+    auto* alpha = new map<char,uint32_t>;
+    auto* beta = new map<uint32_t,char>;
+    while(!alphabet.eof()){
+        alphabet.getline(buffer, 1000*sizeof(char));
+        char c;
+        uint32_t u;
+        sscanf(buffer,"%c %u",&c, &u);
+        alpha->insert(pair<char,uint32_t>(c,u));
+        beta->insert(pair<uint32_t,char>(u,c));
     }
-    output.close();
-    return 0;
-}
+    alpha->insert(pair<char,uint32_t>(' ',1234));
+    beta->insert(pair<uint32_t,char>(1234,' '));
 
+    alpha->insert(pair<char,uint32_t>('\n',1235));
+    beta->insert(pair<uint32_t,char>(1235,'\n'));
 
-int main(int argc, char* argv[]) {
-    assert(argc == 3);
-    prime_ = atoi(argv[1]);
-    string start = string(argv[2]);
-    pipeline pipeline_{start,"middle","end"};
+    alphabet.close();
 
-    MapReduce* mapReduce = new MapReduce(4,pipeline_,mapFunc,reduceFunc);
-    mapReduce->run();
+    fstream raw_file("Data/raw_file.txt", ios::in);
+    auto * chars = new vector<uint32_t>();
+    while(!raw_file.eof()){
+        char c;
+        raw_file.read(&c, sizeof(char));
+        c = tolower(c);
+        if(alpha->contains(c)){
+            chars->push_back(alpha->at(c));
+        }
+    }
+    raw_file.close();
 
+    auto* threads = new vector<thread>();
+    crptxt* crptxts = new crptxt[chars->size()];
+    uint32_t* ds = new uint32_t [chars->size()];
+    for(uint32_t i = 0; i < chars->size(); i++){
+        threads->push_back(thread(Encrypt,chars->at(i),i,crptxts,ds));
+    }
+
+    fstream result("Tmp/result.txt",ios::out | ios::trunc);
+    fstream crp("Tmp/crptxts.txt",ios::out | ios::trunc);
+    fstream dd("Tmp/ds.txt",ios::out | ios::trunc);
+    for(uint32_t i = 0; i < chars->size(); i++){
+        threads->at(i).join();
+        crp << crptxts[i].c1 << ',' << crptxts[i].c2 << endl;
+        dd << ds[i] << endl;
+        uint32_t M = decrypt(crptxts[i],ds[i],prime);
+        char c = beta->at(M);
+        result << c;
+    }
+    result.close();
+    crp.close();
+    dd.close();
+    delete threads;
+    delete crptxts;
+    delete ds;
+    delete alpha;
+    delete beta;
 }
 

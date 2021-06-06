@@ -8,6 +8,5 @@ CMakeFiles/ELGamal.dir/MapReduce.cpp.o: ../MapReduce.cpp
 CMakeFiles/ELGamal.dir/MapReduce.cpp.o: ../MapReduce.h
 
 CMakeFiles/ELGamal.dir/main.cpp.o: ../ELGamal.h
-CMakeFiles/ELGamal.dir/main.cpp.o: ../MapReduce.h
 CMakeFiles/ELGamal.dir/main.cpp.o: ../main.cpp
 

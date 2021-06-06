@@ -4,6 +4,8 @@
 
 #include "ELGamal.h"
 
+
+
 /*
  * 模逆运算
  */
@@ -21,7 +23,7 @@ uint64_t reverse(uint64_t V, uint64_t prime){
  * 加密
  */
 vector<uint64_t>* encrypt(uint64_t M, uint64_t p, uint64_t alpha, uint64_t y){
-    auto* C = new vector<uint64_t>;
+    vector<uint64_t>* C = new vector<uint64_t>;
     uint64_t k,U;
     do{
         do{
@@ -38,14 +40,14 @@ vector<uint64_t>* encrypt(uint64_t M, uint64_t p, uint64_t alpha, uint64_t y){
 /*
  * 解密
  */
-uint64_t decrypt(vector<uint64_t>* C, uint64_t d, uint64_t p){
-    uint64_t V = modulo(C->at(0),d,p);
+uint64_t decrypt(crptxt C, uint64_t d, uint64_t p){
+    uint64_t V = modulo(C.c1,d,p);
     uint64_t rV = reverse(V,p);
 
     assert((rV*V)%p == 1);
     uint64_t M = 0;
     if(rV){
-        M = (C->at(1)*rV)%p;
+        M = (C.c2*rV)%p;
     }
     return M;
 }

@@ -18,23 +18,11 @@ algorithm
 random
 -
 
-/Users/leaves/CLionProjects/ELGamal/MapReduce.h
-thread
-/Users/leaves/CLionProjects/ELGamal/thread
-vector
-/Users/leaves/CLionProjects/ELGamal/vector
-cstdint
--
-string
--
-iostream
-/Users/leaves/CLionProjects/ELGamal/iostream
-fstream
-/Users/leaves/CLionProjects/ELGamal/fstream
-
 /Users/leaves/CLionProjects/ELGamal/main.cpp
-MapReduce.h
-/Users/leaves/CLionProjects/ELGamal/MapReduce.h
+map
+-
 ELGamal.h
 /Users/leaves/CLionProjects/ELGamal/ELGamal.h
+thread
+/Users/leaves/CLionProjects/ELGamal/thread
 
